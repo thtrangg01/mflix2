@@ -41,7 +41,7 @@
         </div>
     </div>
 </nav>
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" th:fragment="carousel">
+<div th:if="${showCarousel}" id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" th:fragment="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -79,6 +79,15 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
+<nav th:if="${showBreadcrumb}" class="container mt-5" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" th:fragment="breadcrumb">
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">
+            <span th:utext="${breadCrumb}">Action</span>
+        </li>
+    </ol>
+</nav>
 
 <footer th:fragment="footer">
     <div class="bg-light text-center text-lg-start mt-5">

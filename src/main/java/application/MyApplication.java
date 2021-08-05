@@ -1,5 +1,6 @@
 package application;
 
+import controller.CommentController;
 import controller.HomeController;
 import controller.IController;
 import controller.MovieController;
@@ -15,7 +16,7 @@ import java.util.Map;
 public class MyApplication {
 
     public TemplateEngine templateEngine;
-    private Map<String, IController> controllersByURL;
+    private final Map<String, IController> controllersByURL;
 
     public MyApplication(final ServletContext servletContext) {
         super();
@@ -31,6 +32,8 @@ public class MyApplication {
 
         this.controllersByURL.put("/", new HomeController());
         this.controllersByURL.put("/movie", new MovieController());
+        this.controllersByURL.put("/comment", new CommentController());
+
     }
 
     public IController resolveControllerForRequest(final HttpServletRequest request) {

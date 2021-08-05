@@ -33,6 +33,20 @@ public class HomeController implements IController {
         }
         ctx.setVariable("url", url);
 
+        boolean showCarousel = true;
+        boolean showBreadcrumb = true;
+        if (by != null || text != null) {  //Filter
+            showCarousel = false;
+            if (by != null)
+                ctx.setVariable("breadCrumb", value);
+            else if (text != null)
+                ctx.setVariable("breadCrumb", "Search result for: <b>" + text + "</b>");
+        } else { //Home
+            showBreadcrumb = false;
+        }
+        ctx.setVariable("showCarousel", showCarousel);
+        ctx.setVariable("showBreadcrumb", showBreadcrumb);
+
         long totalPages = new MovieService().getTotalPages(by, value, text);
         ctx.setVariable("totalPages", totalPages);
         int page = 1;
