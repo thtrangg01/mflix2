@@ -1,6 +1,5 @@
 package controller;
 
-import com.mongodb.client.DistinctIterable;
 import model.Movie;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -18,10 +17,6 @@ public class MovieController implements IController {
         String id = request.getParameter("id");
         Movie movie = new MovieService().getMovieByID(id);
         ctx.setVariable("movie", movie);
-        List<String> genres = new MovieService().getGenresforHeader();
-        ctx.setVariable("genres", genres);
         templateEngine.process("movie", ctx, response.getWriter());
     }
-
-
 }

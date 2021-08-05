@@ -30,15 +30,21 @@ public class MyFilter implements Filter {
     }
 
     private boolean process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if (request.getRequestURI().startsWith("/css") || request.getRequestURI().startsWith("/images") || request.getRequestURI().startsWith("/favicon"))
+        if (request.getRequestURI().startsWith("/css") || request.getRequestURI().startsWith("/images") || request.getRequestURI().startsWith("/templates"))
             return false;
         IController controller = this.application.resolveControllerForRequest(request);
-        ITemplateEngine templateEngine = this.application.templateEngine;
-        response.setContentType("text/html;charset=UTF-8");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setDateHeader("Expires", 0);
-        controller.process(request, response, this.servletContext, templateEngine);
+        if (controller == null) {
+            System.out.println();
+        } else {
+            ITemplateEngine templateEngine = this.application.templateEngine;
+            response.setContentType("text/html;charset=UTF-8");
+            response.setHeader("Pragma", "no-cache");
+            response.setHeader("Cache-Control", "no-cache");
+            response.setDateHeader("Expires", 0);
+
+            controller.process(request, response, this.servletContext, templateEngine);
+        }
         return true;
+
     }
 }

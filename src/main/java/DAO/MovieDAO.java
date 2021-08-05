@@ -63,4 +63,18 @@ public class MovieDAO extends AbsDAO {
                 new Document("$limit",limit)));
         return result;
     }
+
+
+    public List<Movie> searchMovies(Document filter, Document sort, int limit, int skip) {
+        MongoCollection<Document> movies = getDB().getCollection("movies");
+        List<Movie> list = new ArrayList<>();
+        movies.find(filter).sort(sort).limit(limit).skip(skip).forEach(d -> list.add(docToMovie(d)));
+        return list;
+    }
+
+    public long getMoviesNumber(Document filter) {
+        MongoCollection<Document> movies = getDB().getCollection("movies");
+        return movies.countDocuments(filter);
+
+    }
 }
