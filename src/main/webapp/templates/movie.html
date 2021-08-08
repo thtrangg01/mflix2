@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 
 <head th:replace="~{fragments/frontend::head}">
@@ -43,7 +43,7 @@
 
             <div th:if="*{tomatoes.critic!=null}">
                 <hr>
-                🍅 <b>Tomatometer rating:</b> <span th:text="*{tomatoes.critic.rating}">8.8 </span> (<span th:text="*{tomatoes.critic.numReviews}">20</span> reviews)
+                🌎🍅 <b>Tomatometer rating:</b> <span th:text="*{tomatoes.critic.rating}">8.8 </span> (<span th:text="*{tomatoes.critic.numReviews}">20</span> reviews)
                 🍿 <b>Audience rating:</b> <span th:text="*{tomatoes.viewer.rating}">8.8 </span> (<span th:text="*{tomatoes.viewer.numReviews}">20</span> reviews)
             </div>
 
