@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿
+<!doctype html>
 <html>
 
 <head th:replace="~{fragments/frontend::head}">
@@ -41,9 +42,9 @@
             <hr>
             🏆 <b>Awards:</b> <span th:text="*{awards.text}">Awards</span>
 
-            <div th:if="*{tomatoes.critic!=null}">
+            <div th:if="*{tomatoes!=null && tomatoes.critic!=null}">
                 <hr>
-                🌎🍅 <b>Tomatometer rating:</b> <span th:text="*{tomatoes.critic.rating}">8.8 </span> (<span th:text="*{tomatoes.critic.numReviews}">20</span> reviews)
+                🍅 <b>Tomatometer rating:</b> <span th:text="*{tomatoes.critic.rating}">8.8 </span> (<span th:text="*{tomatoes.critic.numReviews}">20</span> reviews)
                 🍿 <b>Audience rating:</b> <span th:text="*{tomatoes.viewer.rating}">8.8 </span> (<span th:text="*{tomatoes.viewer.numReviews}">20</span> reviews)
             </div>
 
@@ -55,7 +56,7 @@
             <hr>
             <div class="card shadow-0 border mt-5" style="background-color: #f0f2f5;">
                 <div class="card-body p-4">
-                    <h5 class="mb-4"> Comments (<span th:text="${comments}">20</span>)</h5>
+                    <h5 class="mb-4"> Comments (<span th:text="*{num_mflix_comments}">20</span>)</h5>
                     <div class="form-outline mb-4">
                         <form class="d-flex user d-none" method="post" th:action="@{/comment(action=addComment)}">
                             <input type="hidden" th:value="*{id}" name="movie_id"/>
