@@ -16,7 +16,7 @@ public class MovieService {
         return movie;
     }
 
-    final static int NUM_OF_MOVIE_ON_PAGE = 6;
+    final static int NUM_OF_MOVIE_ON_PAGE = 12;
     public List<Movie> searchMovies(String by, String value, int page, String text) {
         Document filter = new Document();
 

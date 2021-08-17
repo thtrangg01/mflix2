@@ -1,5 +1,6 @@
 package controller;
 
+import com.mongodb.client.DistinctIterable;
 import com.mongodb.client.FindIterable;
 import model.Comment;
 import model.Movie;
@@ -11,15 +12,19 @@ import service.MovieService;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MovieController implements IController {
+
+public class MovieController extends MyController {
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext, ITemplateEngine templateEngine) throws Exception {
-        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+        super.process(request, response, servletContext, templateEngine);
         String id = request.getParameter("id");
         Movie movie = new MovieService().getMovieByID(id);
         ctx.setVariable("movie", movie);
+
+        ctx.setVariable("url", "movie?id=" + id);
 
         FindIterable<Comment> comments = new CommentService().getComments("movie_id", movie.getId());
         ctx.setVariable("comments", comments);

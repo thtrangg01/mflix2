@@ -46,5 +46,9 @@
     <orderEntry type="library" name="Maven: org.mongodb:bson:4.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.2.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.20" level="project" />
+    <orderEntry type="library" name="jquery-3.6.0" level="application" />
+    <orderEntry type="library" name="firebase-app" level="application" />
+    <orderEntry type="library" name="firebase-auth" level="application" />
+    <orderEntry type="library" name="firebase-ui-auth" level="application" />
   </component>
 </module>

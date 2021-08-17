@@ -40,3 +40,11 @@
     min-height: 300px;
     object-fit: cover;
 }
+
+[class*='mdl-shadow']{
+    box-shadow: none;
+}
+
+.dropdown-menu-center {
+    transform: translate(-28%, 0) !important;
+}
