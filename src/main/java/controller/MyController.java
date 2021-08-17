@@ -1,4 +1,4 @@
-﻿package controller;
+package controller;
 
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -8,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.HttpCookie;
 import java.util.Locale;
 
 public abstract class MyController implements IController {
@@ -27,5 +26,4 @@ public abstract class MyController implements IController {
         }
         ctx = new WebContext(request, response, servletContext, locale);
     }
-
 }
