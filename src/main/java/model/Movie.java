@@ -19,6 +19,7 @@ public class Movie {
     private String type;
     private String poster;
     private int num_mflix_comments;
+    private String movieID;
 
     private List<String> cast;
     private List<String> directors;

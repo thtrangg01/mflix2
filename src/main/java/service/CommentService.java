@@ -1,6 +1,6 @@
 package service;
 
-import DAO.CommentDAO;
+import DAO.MongoDB.CommentDAO;
 import com.mongodb.client.FindIterable;
 import model.Comment;
 import org.bson.Document;

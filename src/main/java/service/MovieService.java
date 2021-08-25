@@ -1,39 +1,43 @@
 package service;
 
-import DAO.MovieDAO;
-import com.mongodb.client.DistinctIterable;
-import model.Movie;
-import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.List;
+import DAO.IMovieDAO;
+import model.Movie;
+
+
+import java.util.*;
 
 public class MovieService {
 
+    IMovieDAO movieDAO;
+
+    public MovieService(IMovieDAO movieDAO) {
+        this.movieDAO = movieDAO;
+    }
 
     public Movie getMovieByID(String id) {
-        Movie movie = new MovieDAO().getMovieByID(id);
+        Movie movie = movieDAO.getMovieByID(id);
         return movie;
     }
 
     final static int NUM_OF_MOVIE_ON_PAGE = 12;
     public List<Movie> searchMovies(String by, String value, int page, String text) {
-        Document filter = new Document();
+        Map filter = new HashMap();
 
         if (by == null & text == null) {
-            filter.append("poster", new Document("$ne", null));  //No poster -> Dont't Appear on Home Page
-            filter.append("plot", new Document("$ne", null)); //No Plot -> Dont't Appear on Home Page
+            filter.put("poster", Collections.singletonMap("$ne", null));  //No poster -> Dont't Appear on Home Page
+            filter.put("plot", Collections.singletonMap("$ne", null)); //No Plot -> Dont't Appear on Home Page
         }
 
-        Document sort = new Document();
+        Map sort = new HashMap();
         if (by != null && value != null)
-            filter.append(by, value);
+            filter.put(by, value);
         if (text != null)
-            filter.append("$text", new Document("$search", text));
+            filter.put("$text", Collections.singletonMap("$search", text));
         else
-            sort.append("year", -1);
+            sort.put("year", -1);
 
-        List<Movie> list = new MovieDAO().searchMovies(filter, sort, NUM_OF_MOVIE_ON_PAGE, (page - 1) * NUM_OF_MOVIE_ON_PAGE);
+        List<Movie> list = movieDAO.searchMovies(filter, sort, NUM_OF_MOVIE_ON_PAGE, (page - 1) * NUM_OF_MOVIE_ON_PAGE);
         if (list == null) {
             list = new ArrayList<>();
             //add some sample movies;
@@ -42,18 +46,14 @@ public class MovieService {
     }
 
     public long getTotalPages(String by, String value, String text) {
-        Document filter = new Document();
-
+        Map filter = new HashMap();
         if (by == null & text == null) {
-            filter.append("poster", new Document("$ne", null));  //No poster -> Dont't Appear on Home Page
-            filter.append("plot", new Document("$ne", null)); //No Plot -> Dont't Appear on Home Page
+            filter.put("poster", Collections.singletonMap("$ne", null));  //No poster -> Dont't Appear on Home Page
+            filter.put("plot", Collections.singletonMap("$ne", null)); //No Plot -> Dont't Appear on Home Page
         }
-
-        if (by != null && value != null)
-            filter.append(by, value);
         if (text != null)
-            filter.append("$text", new Document("$search", text));
-        long totalMovies = new MovieDAO().getMoviesNumber(filter);
+            filter.put("$text", Collections.singletonMap("$search", text));
+        long totalMovies = movieDAO.getMoviesNumber(filter);
         return (long) Math.ceil((float) totalMovies / NUM_OF_MOVIE_ON_PAGE);
     }
 
